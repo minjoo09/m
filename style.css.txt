@@ -1,0 +1,179 @@
+/* 전체 페이지 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* 배경을 예쁜 그라데이션으로 만들어요 */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* 맨 위 헤더 부분 꾸미기 */
+.header {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    /* 모서리를 둥글게 */
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    /* 그림자 효과 */
+}
+
+.header h1 {
+    color: #667eea;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #999;
+    font-size: 1.1em;
+}
+
+/* 전체 컨테이너 */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 각 섹션 꾸미기 */
+.form-section,
+.list-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-section h2,
+.list-section h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+/* 입력 폼 한 줄 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* 입력 필드 꾸미기 */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s;
+    /* 경계선 색이 부드럽게 변해요 */
+}
+
+/* 입력 필드에 마우스 가져갔을 때 */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+}
+
+/* 버튼 꾸미기 */
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    /* 마우스 커서가 손가락 모양으로 */
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    /* 버튼이 살짝 올라가요 */
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-delete {
+    background: #ff6b6b;
+    color: white;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+.btn-delete:hover {
+    background: #ee5a5a;
+}
+
+/* 저장된 항목들을 보여주는 부분 */
+.plan-list {
+    display: grid;
+    gap: 20px;
+}
+
+.plan-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid #667eea;
+    /* 왼쪽에 색깔 띠 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.plan-card:hover {
+    transform: translateY(-3px);
+    /* 마우스 가져가면 살짝 올라가요 */
+}
+
+.plan-card h3 {
+    color: #333;
+    margin-bottom: 12px;
+    font-size: 1.4em;
+}
+
+.plan-info {
+    margin-bottom: 10px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.plan-info strong {
+    color: #667eea;
+}
+
+.empty-message {
+    text-align: center;
+    color: #999;
+    padding: 40px 20px;
+    font-size: 1.1em;
+}

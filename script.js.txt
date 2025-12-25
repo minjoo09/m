@@ -1,0 +1,125 @@
+// 페이지가 시작될 때 실행되는 부분
+document.addEventListener('DOMContentLoaded', function() {
+    // localStorage에서 저장된 기획들을 불러와요
+    loadPlans();
+});
+
+// 저장 버튼 클릭했을 때
+document.getElementById('saveBtn').addEventListener('click', function() {
+    // 입력된 값들을 가져와요
+    const title = document.getElementById('title').value;
+    const genre = document.getElementById('genre').value;
+    const duration = document.getElementById('duration').value;
+    const cast = document.getElementById('cast').value;
+    const plan = document.getElementById('plan').value;
+
+    // 모든 필드가 입력되었는지 확인해요
+    if (!title || !genre || !duration || !cast || !plan) {
+        alert('모든 항목을 입력해주세요! 😊');
+        return;
+    }
+
+    // 새로운 기획 객체를 만들어요
+    const newPlan = {
+        id: Date.now(), // 시간을 이용해서 고유한 번호 만들기
+        title: title,
+        genre: genre,
+        duration: duration,
+        cast: cast,
+        plan: plan,
+        date: new Date().toLocaleDateString('ko-KR')
+    };
+
+    // localStorage에서 저장된 기획들을 가져와요
+    let plans = JSON.parse(localStorage.getItem('plans')) || [];
+    
+    // 새로운 기획을 목록에 추가해요
+    plans.push(newPlan);
+    
+    // 다시 저장해요
+    localStorage.setItem('plans', JSON.stringify(plans));
+
+    // 입력 폼을 비워요 (초기화)
+    clearForm();
+
+    // 화면에 다시 보여줘요
+    loadPlans();
+
+    // 축하 메시지를 띄워요
+    alert('기획이 저장되었어요! 🎉');
+});
+
+// 저장된 기획들을 화면에 보여주는 함수
+function loadPlans() {
+    // localStorage에서 기획들을 가져와요
+    const plans = JSON.parse(localStorage.getItem('plans')) || [];
+    const planList = document.getElementById('planList');
+
+    // 기존 항목들을 모두 지워요
+    planList.innerHTML = '';
+
+    // 저장된 기획이 없으면
+    if (plans.length === 0) {
+        planList.innerHTML = '<div class="empty-message">아직 저장된 기획이 없어요. 첫 번째 기획을 만들어보세요! 📝</div>';
+        return;
+    }
+
+    // 저장된 기획들을 역순으로 보여줘요 (최신순)
+    plans.reverse().forEach(function(item) {
+        // HTML 카드를 만들어요
+        const card = document.createElement('div');
+        card.className = 'plan-card';
+
+        card.innerHTML = `
+            <!-- 제목 -->
+            <h3>${item.title}</h3>
+            
+            <!-- 기획 정보들 -->
+            <div class="plan-info">
+                <strong>📅 저장일:</strong> ${item.date}
+            </div>
+            <div class="plan-info">
+                <strong>🎬 장르:</strong> ${item.genre}
+            </div>
+            <div class="plan-info">
+                <strong>⏱️ 방송 길이:</strong> ${item.duration}분
+            </div>
+            <div class="plan-info">
+                <strong>👥 출연자:</strong> ${item.cast}
+            </div>
+            <div class="plan-info">
+                <strong>💡 기획안:</strong> <br>${item.plan}
+            </div>
+            
+            <!-- 삭제 버튼 -->
+            <button class="btn btn-delete" onclick="deletePlan(${item.id})">🗑️ 삭제</button>
+        `;
+
+        // 만든 카드를 페이지에 추가해요
+        planList.appendChild(card);
+    });
+}
+
+// 입력 폼을 비워주는 함수
+function clearForm() {
+    document.getElementById('title').value = '';
+    document.getElementById('genre').value = '';
+    document.getElementById('duration').value = '';
+    document.getElementById('cast').value = '';
+    document.getElementById('plan').value = '';
+}
+
+// 기획을 삭제하는 함수
+function deletePlan(id) {
+    // 정말로 삭제할지 확인해요
+    if (confirm('정말 삭제할까요? 😢')) {
+        // localStorage에서 모든 기획을 가져와요
+        let plans = JSON.parse(localStorage.getItem('plans')) || [];
+        
+        // 해당 id의 기획만 빼고 나머지만 남겨요
+        plans = plans.filter(function(plan) {
+            return plan.id !== id;
+        });
+        
+        // 다시 저장해요
+        localStorage.setItem('plans', JSON.stringify(plans));
